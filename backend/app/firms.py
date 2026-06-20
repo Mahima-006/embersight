@@ -64,13 +64,21 @@ async def fetch_fire_density(lat: float, lon: float) -> dict:
     url = f"{FIRMS_BASE}/{map_key}/{FIRMS_SOURCE}/{area_str}/{DAY_RANGE}"
 
     try:
+        print("FIRMS URL:", url)
+
         async with httpx.AsyncClient(timeout=HTTP_TIMEOUT) as client:
             resp = await client.get(url)
+
+            print("FIRMS STATUS:", resp.status_code)
+            print("FIRMS RESPONSE:", resp.text[:500])
+
             resp.raise_for_status()
             csv_text = resp.text
-    except Exception as exc:
-        raise RuntimeError(f"FIRMS API request failed: {exc}")
 
+    except Exception as exc:
+        raise RuntimeError(
+            f"FIRMS URL: {url} | FIRMS API request failed: {exc}"
+        )
     # Parse CSV (FIRMS returns header + rows)
     lines = csv_text.strip().split("\n")
     if len(lines) < 2:
