@@ -1,0 +1,478 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --color-surface: #131313;
+  --color-surface-dim: #131313;
+  --color-surface-bright: #3a3939;
+  --color-surface-lowest: #0e0e0e;
+  --color-surface-low: #1c1b1b;
+  --color-surface-container: #201f1f;
+  --color-surface-high: #2a2a2a;
+  --color-surface-highest: #353534;
+  --color-on-surface: #e5e2e1;
+  --color-on-surface-variant: #e4beb1;
+  --color-outline: #ab897d;
+  --color-outline-variant: #5b4137;
+  --color-primary: #ffb59a;
+  --color-primary-container: #ff5c00;
+  --color-on-primary: #5a1b00;
+  --color-secondary: #aec6ff;
+  --color-secondary-container: #508eff;
+  --color-tertiary: #a0c9ff;
+  --color-tertiary-container: #0096fd;
+  --color-fire-orange: #FF5C00;
+  --color-fire-amber: #FF8C00;
+  --color-fire-red: #FF2D00;
+  --color-ember: #FFB59A;
+  --color-smoke: #6B6560;
+  --color-ash: #3A3939;
+
+  --font-display: 'Geist', 'Inter', system-ui, sans-serif;
+  --font-body: 'Inter', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  --animate-pulse-fire: pulse-fire 2s ease-in-out infinite;
+  --animate-ember-float: ember-float 3s ease-in-out infinite;
+  --animate-fade-in-up: fade-in-up 0.6s ease-out forwards;
+  --animate-fade-in: fade-in 0.4s ease-out forwards;
+  --animate-shimmer: shimmer 2s infinite;
+  --animate-blink: blink 1.5s ease-in-out infinite;
+}
+
+/* ─── CSS Custom Properties ──────────────────────────────────── */
+:root {
+  --color-surface: #131313;
+  --color-surface-lowest: #0e0e0e;
+  --color-surface-low: #1c1b1b;
+  --color-surface-container: #201f1f;
+  --color-surface-high: #2a2a2a;
+  --color-surface-highest: #353534;
+  --color-on-surface: #e5e2e1;
+  --color-on-surface-variant: #e4beb1;
+  --color-outline: #ab897d;
+  --color-outline-variant: #5b4137;
+  --color-primary: #ffb59a;
+  --color-primary-container: #ff5c00;
+  --color-secondary: #aec6ff;
+  --color-secondary-container: #508eff;
+  --color-fire-orange: #FF5C00;
+  --color-fire-amber: #FF8C00;
+  --color-ember: #FFB59A;
+
+  --radius-sm: 0.25rem;
+  --radius: 0.5rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.5rem;
+
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 48px;
+
+  --font-display: 'Geist', 'Inter', system-ui, sans-serif;
+  --font-body: 'Inter', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+
+/* ─── Base Reset ─────────────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background-color: var(--color-surface-lowest);
+  color: var(--color-on-surface);
+  font-family: var(--font-body);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* ─── Geist Font (self-hosted via CDN) ───────────────────────── */
+@font-face {
+  font-family: 'Geist';
+  src: url('https://cdn.jsdelivr.net/npm/geist@1.3.0/dist/fonts/geist-sans/Geist-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Geist';
+  src: url('https://cdn.jsdelivr.net/npm/geist@1.3.0/dist/fonts/geist-sans/Geist-Medium.woff2') format('woff2');
+  font-weight: 500;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Geist';
+  src: url('https://cdn.jsdelivr.net/npm/geist@1.3.0/dist/fonts/geist-sans/Geist-SemiBold.woff2') format('woff2');
+  font-weight: 600;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Geist';
+  src: url('https://cdn.jsdelivr.net/npm/geist@1.3.0/dist/fonts/geist-sans/Geist-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-display: swap;
+}
+
+/* ─── Liquid Glass Components ────────────────────────────────── */
+@layer components {
+
+  /* Light glass — nav pills, small elements */
+  .liquid-glass {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow:
+      inset 0 1px 1px rgba(255, 255, 255, 0.08),
+      0 1px 3px rgba(0, 0, 0, 0.3);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .liquid-glass::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(
+      180deg,
+      rgba(255,255,255,0.18) 0%,
+      rgba(255,255,255,0.06) 25%,
+      transparent 50%,
+      rgba(255,255,255,0.06) 75%,
+      rgba(255,255,255,0.18) 100%
+    );
+    -webkit-mask:
+      linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+  }
+
+  /* Strong glass — main panels, cards */
+  .liquid-glass-strong {
+    background: rgba(20, 19, 19, 0.72);
+    backdrop-filter: blur(40px);
+    -webkit-backdrop-filter: blur(40px);
+    box-shadow:
+      4px 4px 24px rgba(0, 0, 0, 0.4),
+      inset 0 1px 1px rgba(255, 255, 255, 0.1),
+      inset 0 -1px 1px rgba(0, 0, 0, 0.3);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .liquid-glass-strong::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(
+      135deg,
+      rgba(255,255,255,0.15) 0%,
+      rgba(255,255,255,0.05) 30%,
+      transparent 60%,
+      rgba(255,255,255,0.08) 100%
+    );
+    -webkit-mask:
+      linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+  }
+
+  /* Fire glass — orange-tinted panels */
+  .liquid-glass-fire {
+    background: rgba(255, 92, 0, 0.08);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    box-shadow:
+      0 0 30px rgba(255, 92, 0, 0.15),
+      inset 0 1px 1px rgba(255, 180, 100, 0.15);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .liquid-glass-fire::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(
+      135deg,
+      rgba(255,140,0,0.4) 0%,
+      rgba(255,92,0,0.1) 50%,
+      rgba(255,45,0,0.3) 100%
+    );
+    -webkit-mask:
+      linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+  }
+
+  /* ─── Button Components ──── */
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    border-radius: 9999px;
+    font-weight: 600;
+    font-size: 0.875rem;
+    transition: all 0.2s;
+    background: var(--color-fire-orange);
+    color: #fff;
+    box-shadow: 0 0 20px rgba(255,92,0,0.4);
+  }
+  .btn-primary:hover {
+    transform: scale(1.03);
+    box-shadow: 0 0 30px rgba(255,92,0,0.6);
+  }
+  .btn-primary:active {
+    transform: scale(0.97);
+  }
+
+  .btn-ghost {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.625rem 1.25rem;
+    border-radius: 9999px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    transition: all 0.2s;
+    color: rgba(229,226,225,0.8);
+    border: 1px solid rgba(171,137,125,0.3);
+    background: transparent;
+  }
+  .btn-ghost:hover {
+    border-color: rgba(255,92,0,0.5);
+    color: var(--color-primary);
+    background: rgba(255,92,0,0.08);
+  }
+
+  /* ─── Card Components ──── */
+  .data-card {
+    border-radius: 0.75rem;
+    padding: 1rem;
+    background: var(--color-surface-low);
+    border: 1px solid rgba(91,65,55,0.3);
+  }
+
+  .data-card-hover {
+    border-radius: 0.75rem;
+    padding: 1rem;
+    background: var(--color-surface-low);
+    border: 1px solid rgba(91,65,55,0.3);
+    transition: all 0.2s;
+  }
+  .data-card-hover:hover {
+    border-color: rgba(255,92,0,0.3);
+    box-shadow: 0 0 20px rgba(255,92,0,0.1);
+  }
+
+  /* ─── Status Chips (shared base) ──── */
+  .chip-critical,
+  .chip-high,
+  .chip-moderate,
+  .chip-low {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+  .chip-critical {
+    background: rgba(255,45,0,0.15);
+    color: #FF4A1C;
+    border: 1px solid rgba(255,45,0,0.3);
+  }
+  .chip-high {
+    background: rgba(255,92,0,0.15);
+    color: #FF5C00;
+    border: 1px solid rgba(255,92,0,0.3);
+  }
+  .chip-moderate {
+    background: rgba(255,200,0,0.12);
+    color: #FFC800;
+    border: 1px solid rgba(255,200,0,0.25);
+  }
+  .chip-low {
+    background: rgba(80,200,80,0.12);
+    color: #4ADE80;
+    border: 1px solid rgba(80,200,80,0.25);
+  }
+
+  /* ─── Input ──── */
+  .search-input {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border-radius: 0.75rem;
+    font-size: 0.875rem;
+    outline: none;
+    transition: all 0.2s;
+    background: var(--color-surface-lowest);
+    color: var(--color-on-surface);
+    border: 1px solid rgba(91,65,55,0.4);
+    font-family: var(--font-body);
+  }
+  .search-input::placeholder {
+    color: rgba(171,137,125,0.6);
+  }
+  .search-input:focus {
+    border-color: rgba(255,92,0,0.5);
+    box-shadow: 0 0 0 3px rgba(255,92,0,0.1);
+  }
+
+  /* ─── Section Labels ──── */
+  .section-label {
+    font-size: 0.75rem;
+    font-family: 'JetBrains Mono', monospace;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-outline);
+  }
+
+  /* ─── Divider ──── */
+  .divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(91,65,55,0.4), transparent);
+  }
+
+  /* ─── Map Controls ──── */
+  .map-control-btn {
+    width: 2.25rem;
+    height: 2.25rem;
+    border-radius: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.15s;
+    background: rgba(20,19,19,0.8);
+    border: 1px solid rgba(91,65,55,0.3);
+    color: rgba(229,226,225,0.7);
+    backdrop-filter: blur(12px);
+  }
+  .map-control-btn:hover {
+    background: rgba(255,92,0,0.15);
+    border-color: rgba(255,92,0,0.4);
+    color: var(--color-primary);
+  }
+
+  /* ─── Scrollbar ──── */
+  ::-webkit-scrollbar {
+    width: 4px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--color-surface-lowest);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: rgba(91,65,55,0.5);
+    border-radius: 2px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(255,92,0,0.4);
+  }
+}
+
+/* ─── Maplibre overrides ─────────────────────────────────────── */
+.maplibregl-canvas {
+  outline: none;
+}
+.maplibregl-ctrl-logo,
+.maplibregl-ctrl-attrib {
+  display: none !important;
+}
+.maplibregl-popup-content {
+  background: rgba(20,19,19,0.92) !important;
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(91,65,55,0.4) !important;
+  border-radius: 12px !important;
+  padding: 0 !important;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.5) !important;
+  color: #e5e2e1 !important;
+  font-family: var(--font-body);
+  min-width: 220px;
+}
+.maplibregl-popup-tip {
+  border-top-color: rgba(20,19,19,0.92) !important;
+}
+.maplibregl-popup-close-button {
+  color: rgba(171,137,125,0.7) !important;
+  font-size: 18px !important;
+  padding: 8px 10px !important;
+}
+.maplibregl-popup-close-button:hover {
+  color: #e5e2e1 !important;
+  background: transparent !important;
+}
+
+/* ─── Fire Particle Animation ────────────────────────────────── */
+.fire-particle {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  animation: ember-float linear infinite;
+}
+
+/* ─── Grid overlay ───────────────────────────────────────────── */
+.tactical-grid {
+  background-image:
+    linear-gradient(rgba(255,92,0,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,92,0,0.04) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+
+/* ─── Recharts overrides ─────────────────────────────────────── */
+.recharts-cartesian-grid-horizontal line,
+.recharts-cartesian-grid-vertical line {
+  stroke: rgba(91,65,55,0.2) !important;
+}
+.recharts-tooltip-wrapper {
+  outline: none;
+}
+
+/* ─── MapLibre marker pulse ──────────────────────────────────── */
+.fire-marker-pulse {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  cursor: pointer;
+  animation: pulse-fire 2s ease-in-out infinite;
+}
+
+.fire-marker-ring {
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  border: 2px solid currentColor;
+  opacity: 0.4;
+  animation: ring-expand 2s ease-out infinite;
+}
+
+@keyframes ring-expand {
+  0% { transform: scale(0.8); opacity: 0.6; }
+  100% { transform: scale(2); opacity: 0; }
+}
