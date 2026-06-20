@@ -16,6 +16,9 @@ import type { FireIncident } from '../types/fire';
 import RiskExplainDrawer from '../components/RiskPanel/RiskExplainDrawer';
 import { getNearestLandmark } from '../utils/landmark';
 
+const API_BASE_URL =
+  import.meta.env.VITE_API_URL || "https://embersight.onrender.com";
+
 const DEFAULT_LOCATION: LocationEntry = {
   name: 'california',
   displayName: 'California, USA',
@@ -73,13 +76,14 @@ export default function DashboardPage() {
       const { lat, lng } = selectedLocation;
       
       try {
-        const [riskResp, recResp, firesResp, histResp, foreResp, impResp] = await Promise.all([
-          fetch(`http://localhost:8000/risk?lat=${lat}&lon=${lng}`),
-          fetch(`http://localhost:8000/recommendations?lat=${lat}&lon=${lng}`),
-          fetch(`http://localhost:8000/fires?lat=${lat}&lon=${lng}`),
-          fetch(`http://localhost:8000/risk/history?lat=${lat}&lon=${lng}`),
-          fetch(`http://localhost:8000/risk/forecast?lat=${lat}&lon=${lng}`),
-          fetch(`http://localhost:8000/community-impact?lat=${lat}&lon=${lng}`)
+        const [riskResp, recResp, firesResp, histResp, foreResp, impResp] =
+        await Promise.all([
+          fetch(`${API_BASE_URL}/risk?lat=${lat}&lon=${lng}`),
+          fetch(`${API_BASE_URL}/recommendations?lat=${lat}&lon=${lng}`),
+          fetch(`${API_BASE_URL}/fires?lat=${lat}&lon=${lng}`),
+          fetch(`${API_BASE_URL}/risk/history?lat=${lat}&lon=${lng}`),
+          fetch(`${API_BASE_URL}/risk/forecast?lat=${lat}&lon=${lng}`),
+          fetch(`${API_BASE_URL}/community-impact?lat=${lat}&lon=${lng}`)
         ]);
         
         if (!riskResp.ok || !recResp.ok || !firesResp.ok) {
