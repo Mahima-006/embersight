@@ -1,5 +1,5 @@
-from fastapi import FastAPI, Query, HTTPException
-from fastapi.middleware.cors import CORSMiddleware
+from FastAPI import FastAPI, Query, HTTPException
+from FastAPI.middleware.cors import CORSMiddleware
 from datetime import datetime, timezone
 
 from app.weather import fetch_current_weather, fetch_weather_series
@@ -9,7 +9,7 @@ from app.recommendations import generate_recommendations
 from app.nominatim import geocode, reverse_geocode
 from app.overpass import fetch_nearby_places, fetch_community_impact
 
-app = FastAPI(title="EmberSight - Core API", version="1.1.0")
+app = FastAPI(title="FastAPI - Core API", version="1.1.0")
 
 # Enable CORS for frontend local development
 app.add_middleware(

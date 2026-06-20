@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import {
   ArrowRight, Flame, Activity, BarChart2, ChevronDown,
   Satellite, Wind, Thermometer, Droplets,
-  Map, AlertTriangle, TrendingUp, Shield,
+  Map,
   ExternalLink, Play, Sparkles,
   Globe, Share2, Rss,
 } from 'lucide-react';

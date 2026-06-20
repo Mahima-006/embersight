@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, Flame, ShieldAlert, Users, Compass, Calendar, Radio, Activity } from 'lucide-react';
+import { X, Flame, Compass,  Activity } from 'lucide-react';
 import type { FireIncident } from '../../types/fire';
 import { getNearestLandmark } from '../../utils/landmark';
 import { getSpreadDirection } from '../../utils/spread';
