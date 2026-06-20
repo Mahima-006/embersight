@@ -1,5 +1,5 @@
-from FastAPI import FastAPI, Query, HTTPException
-from FastAPI.middleware.cors import CORSMiddleware
+from fastapi import FastAPI, Query, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
 from datetime import datetime, timezone
 
 from app.weather import fetch_current_weather, fetch_weather_series
