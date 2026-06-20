@@ -47,6 +47,13 @@ def _parse_series_and_calculate_indices(hourly_data: dict) -> tuple[int, int, in
     
     return current_idx, last_week_idx, last_month_idx, tomorrow_idx, in_3_days_idx
 
+@app.get("/")
+async def root():
+    return {
+        "service": "EmberSight API",
+        "status": "healthy"
+    }
+    
 @app.get("/search")
 async def get_search(q: str = Query(..., description="Query string to search location")):
     result = await geocode(q)
