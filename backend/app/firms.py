@@ -15,7 +15,7 @@ HTTP_TIMEOUT = 15.0
 
 # Default search radius and look-back window
 RADIUS_KM  = 50
-DAY_RANGE  = 7
+DAY_RANGE  = 5
 
 # FIRMS VIIRS SNPP Near Real-Time — best latency for recent fires
 FIRMS_SOURCE = "VIIRS_SNPP_NRT"
